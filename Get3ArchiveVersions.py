@@ -2,13 +2,16 @@ import webbrowser
 import requests
 
 pages = {}
-pageurl = 'https://google.com'
-dates = [20230126, 20220820, 20210122]
+pageurl = 'https://pjwstk.edu.pl'
+dates = ["20230126", "20220820", "20210122"]
 for date in dates:
-    url = "http://archive.org/wayback/availableurl="+pageurl+"&timestamp="+str(date)
-    print(url)
+    url = "http://archive.org/wayback/available?url="+pageurl+"&timestamp="+date
     response = requests.get(url)
     d = response.json()
-    pages[date] = d["archived_snapchots"]["closest"]["url"]
+    if "closest" in d["archived_snapshots"]:
+        pages[date] = d["archived_snapshots"]["closest"]["url"]
+    else:
+        print(f"No archive for {date}")
 print(pages)
-#webbrowser.open(pages)
+for page in pages:
+    webbrowser.open(page)

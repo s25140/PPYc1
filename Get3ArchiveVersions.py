@@ -3,7 +3,7 @@ import requests
 
 pages = {}
 pageurl = 'https://pjwstk.edu.pl'
-dates = ["20230126", "20220820", "20210122"]
+dates = ["20230126", "19900820", "20000122"]
 for date in dates:
     url = "http://archive.org/wayback/available?url="+pageurl+"&timestamp="+date
     response = requests.get(url)
